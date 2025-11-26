@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quản trị Hoa</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .form-popup {
+        display: none;
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        border: 1px solid #333;
+        padding: 20px;
+        background-color: #fff;
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      .form-popup input,
+      .form-popup textarea {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Quản trị danh sách Hoa</h1>
+
+    <button onclick="showForm('add')">Thêm hoa mới</button>
+
+    <table border="1" cellpadding="10">
+      <thead>
+        <tr>
+          <th>Ảnh</th>
+          <th>Tên Hoa</th>
+          <th>Mô Tả</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody id="admin-table"></tbody>
+    </table>
+
+    <!-- Form thêm/sửa -->
+    <div id="flowerForm" class="form-popup">
+      <h3 id="formTitle">Thêm Hoa</h3>
+      <form>
+        <label>Tên Hoa:</label>
+        <input type="text" id="flowerName" />
+
+        <label>Mô Tả:</label>
+        <textarea id="flowerDesc"></textarea>
+
+        <label>Ảnh (đường dẫn):</label>
+        <input type="text" id="flowerImage" />
+
+        <button type="button" onclick="closeForm()">Đóng</button>
+        <button type="button">Lưu</button>
+      </form>
+    </div>
+
+    <script>
+      const flowers = [
+        {
+          name: "Hoa Hồng",
+          description: "Loài hoa biểu tượng của tình yêu.",
+          image: "image/hoa1.jpg",
+        },
+        {
+          name: "Hoa Cúc",
+          description: "Nở đẹp vào mùa hè, nhiều màu sắc.",
+          image: "image/hoa2.jpg",
+        },
+        {
+          name: "Hoa Thanh Tú",
+          description: "Sang trọng, lâu tàn, hương nhẹ.",
+          image: "image/hoa3.jpg",
+        },
+      ];
+
+      // Render bảng admin
+      const table = document.getElementById("admin-table");
+
+      function renderTable() {
+        table.innerHTML = "";
+        flowers.forEach((flower, index) => {
+          table.innerHTML += `
+        <tr>
+            <td><img src="${flower.image}" width="80"></td>
+            <td>${flower.name}</td>
+            <td>${flower.description}</td>
+            <td>
+                <button onclick="showForm('edit', ${index})">Sửa</button>
+                <button>Xoá</button>
+            </td>
+        </tr>
+        `;
+        });
+      }
+      renderTable();
+
+      // Hiển thị form
+      function showForm(action, id = null) {
+        document.getElementById("flowerForm").style.display = "block";
+        document.getElementById("formTitle").innerText =
+          action === "add" ? "Thêm Hoa" : "Sửa Hoa";
+
+        if (action === "edit") {
+          const flower = flowers[id];
+          document.getElementById("flowerName").value = flower.name;
+          document.getElementById("flowerDesc").value = flower.description;
+          document.getElementById("flowerImage").value = flower.image;
+        } else {
+          document.getElementById("flowerName").value = "";
+          document.getElementById("flowerDesc").value = "";
+          document.getElementById("flowerImage").value = "";
+        }
+      }
+
+      // Đóng form
+      function closeForm() {
+        document.getElementById("flowerForm").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
