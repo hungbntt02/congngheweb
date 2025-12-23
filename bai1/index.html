@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Danh sách các loài hoa</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>14 Loài Hoa Tuyệt Đẹp</h1>
+    <div id="flower-list" class="user-view"></div>
+
+    <script>
+      const flowers = [
+        {
+          name: "Hoa Hồng",
+          description: "Loài hoa biểu tượng của tình yêu.",
+          image: "image/hoa1.jpg",
+        },
+        {
+          name: "Hoa Cúc",
+          description: "Nở đẹp vào mùa hè, nhiều màu sắc.",
+          image: "image/hoa2.jpg",
+        },
+        {
+          name: "Hoa Thanh Tú",
+          description: "Sang trọng, lâu tàn, hương nhẹ.",
+          image: "image/hoa3.jpg",
+        },
+        {
+          name: "Hoa Dạ Yến Thảo",
+          description: "Sang trọng, lâu tàn, hương nhẹ.",
+          image: "image/hoa4.jpg",
+        },
+        {
+          name: "Hoa Giấy",
+          description: "Sang trọng, lâu tàn, hương nhẹ.",
+          image: "image/hoa5.jpg",
+        },
+      ];
+
+      // Render dạng bài viết
+      const container = document.getElementById("flower-list");
+
+      flowers.forEach((flower) => {
+        container.innerHTML += `
+        <div class="card">
+            <img src="${flower.image}" alt="${flower.name}">
+            <h3>${flower.name}</h3>
+            <p>${flower.description}</p>
+        </div>
+    `;
+      });
+    </script>
+  </body>
+</html>
